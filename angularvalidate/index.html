@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    .reg-form {
+        transition: all linear 0.5s;
+        background: transparent;
+    }
+    
+    .error {
+        color: red;
+    }
+</style>
+
+<body ng-controller="ExampleController">
+
+
+    <div class="container">
+        <div class="row main">
+            <div class="col-lg-6 main-login main-center">
+                <h5>Sign up once and watch any of our free demos.</h5>
+                <form name="regForm" ng-submit="submitForm()">
+
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="name" ng-model="user.name" placeholder="Enter your Name" required/>
+
+                            </div>
+                            <span class="error" ng-show="regForm.name.$invalid && regForm.name.$dirty">The name is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                <input type="email" class="form-control" name="email" ng-model="user.email" placeholder="Enter your Email" required/>
+                            </div>
+                            <span class="error" ng-show="regForm.email.$invalid && regForm.email.$dirty">The email is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Username</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="username" ng-model="user.username" placeholder="Enter your Username" required />
+                            </div>
+                            <span class="error" ng-show="regForm.username.$invalid && regForm.username.$dirty">The user name is required.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Mobile Number</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+                                <input type="number" class="form-control" name="mobilenumber" ng-model="user.mobile" placeholder="Enter your mobilenumber" ng-minlength="10" ng-maxlength="12" required />
+                            </div>
+                            <p ng-show="regForm.mobilenumber.$error.minlength" class="error help-block">mobile number is too short.</p>
+                            <p ng-show="regForm.mobilenumber.$error.maxlength" class="error help-block">Username is too long.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender" class="cols-sm-2 control-label">Country</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                                <select name="gender" id="gender" class="form-control" ng-model="user.country">
+                                    <option ng-selected="selected">India</option>
+                                    <option>US</option>
+                                    <option>UK</option>
+						       </select>
+                            </div>
+                        </div>
+
+                        <span id="error_gender" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Gender</label>
+                        <div class="cols-sm-10">
+
+                            <label class="radio-inline" for="gender-0">
+      <input type="radio" name="gender" ng-model="user.gender" value="Male" checked="checked">
+      Male
+    </label>
+                            <label class="radio-inline" for="gender-1">
+      <input type="radio" name="gender" ng-model="user.gender" id="gender-1" value="Female">
+      Female
+    </label>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Enter your Password" required />
+                            </div>
+                            <span class="error" ng-show="regForm.password.$invalid && regForm.password.$dirty">Paasword is required.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                <input type="password" class="form-control" name="confirm" ng-model="user.ConformPassword"  placeholder="Confirm your Password" required/>
+                            </div>
+                            <span class="error" ng-show="regForm.confirm.$invalid && regForm.confirm.$dirty">Paasword is inncorrect.</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-disabled="regForm.$invalid">Submit</button>
+                    <button type="button" class="btn btn-primary">Reset</button>
+
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <h2>
+                    Debug
+                </h2>
+                <pre>
+                    user = {{user | json}}
+                </pre>
+            </div>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myApp',[]);
+    app.controller('ExampleController',function($scope,$http){	
+    $scope.insertData=function(){		
+    $http.post("insert.php", {
+		'user.name':$scope.user.name,
+		'user.email':$scope.user.email,
+		'user.username':$scope.user.username,
+		'user.mobile':$scope.user.mobile,
+        'user.country':$scope.user.country,
+        'user.gender':$scope.user.gender,
+        'user.password':$scope.user.password
+        })
+    
+    .success(function(data,status,headers,config){
+    console.log("Data Inserted Successfully");
+    });
+        }
+         });
+    </script>
+</body>
+
+
+</html>
